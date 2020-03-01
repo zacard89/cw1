@@ -10,12 +10,14 @@ namespace cw1
     {
         public static async Task Main(string[] args)
         {
+            if (args.Length == 0) { throw new ArgumentNullException("Nie podales argumentu"); }
            foreach(var a in args)
             {
                 Console.WriteLine(a);
             }
+          
             var emails =await GetEmails(args[0]);
-
+            
             foreach(var email in emails)
             {
                 Console.WriteLine(email);
@@ -27,7 +29,7 @@ namespace cw1
             var HttpClient = new HttpClient();
             var listOfEmails = new List<string>();
             var response = await HttpClient.GetAsync(url);
-
+            
 
 
             Regex emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase);
